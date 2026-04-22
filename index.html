@@ -2,25 +2,96 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Flipkart Clone</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Navbar -->
-  <header>
-    <div class="logo">Flipkart</div>
-    <input type="text" id="search" placeholder="Search for products...">
-    <button onclick="searchProduct()">Search</button>
+  <!-- Top Navbar -->
+  <header class="top-header">
+    <div class="header-container">
+      <div class="logo">🛒 Flipkart</div>
+      <div class="search-container">
+        <input type="text" id="search" placeholder="Search for Products, Brands and More">
+        <button class="search-btn" onclick="searchProduct()">Search</button>
+      </div>
+      <div class="header-actions">
+        <button class="login-btn">Login</button>
+        <div class="more-menu">
+          <span>More</span>
+          <span class="dropdown-icon">▼</span>
+        </div>
+        <div class="cart">
+          <span>🛒</span>
+          <span>Cart</span>
+        </div>
+      </div>
+    </div>
   </header>
 
-  <!-- Banner -->
+  <!-- Category Navigation -->
+  <nav class="category-nav">
+    <div class="nav-container">
+      <div class="category-item">
+        <span class="icon">👕</span>
+        <span>Fashion</span>
+      </div>
+      <div class="category-item">
+        <span class="icon">📱</span>
+        <span>Mobiles</span>
+      </div>
+      <div class="category-item">
+        <span class="icon">💄</span>
+        <span>Beauty</span>
+      </div>
+      <div class="category-item">
+        <span class="icon">💻</span>
+        <span>Electronics</span>
+      </div>
+      <div class="category-item">
+        <span class="icon">🏠</span>
+        <span>Home</span>
+      </div>
+      <div class="category-item">
+        <span class="icon">🔌</span>
+        <span>Appliances</span>
+      </div>
+      <div class="category-item">
+        <span class="icon">🧸</span>
+        <span>Toys</span>
+      </div>
+      <div class="category-item">
+        <span class="icon">🍔</span>
+        <span>Food & H.</span>
+      </div>
+      <div class="category-item">
+        <span class="icon">🚗</span>
+        <span>Auto Acc.</span>
+      </div>
+      <div class="category-item">
+        <span class="icon">📚</span>
+        <span>Books</span>
+      </div>
+      <div class="category-item">
+        <span class="icon">🛋️</span>
+        <span>Furniture</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Banner/Carousel -->
   <section class="banner">
-    <h1>Welcome to Flipkart Clone</h1>
+    <div class="banner-content">
+      <h1>Explore Exclusive Deals</h1>
+      <p>Find the best products at amazing prices</p>
+    </div>
   </section>
 
   <!-- Products -->
-  <section class="products" id="productList">
+  <section class="products-container">
+    <div class="products" id="productList">
+    </div>
   </section>
 
   <script src="script.js"></script>
