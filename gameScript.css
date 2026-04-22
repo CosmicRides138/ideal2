@@ -1,0 +1,87 @@
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
+
+canvas.width = 400;
+canvas.height = 600;
+
+// Player car
+let car = {
+  x: 180,
+  y: 500,
+  width: 40,
+  height: 80,
+  speed: 5
+};
+
+// Road lines
+let lines = [];
+for (let i = 0; i < 10; i++) {
+  lines.push({ x: 190, y: i * 60 });
+}
+
+// Enemy cars
+let enemies = [];
+
+function spawnEnemy() {
+  let xPositions = [120, 180, 240];
+  let x = xPositions[Math.floor(Math.random() * xPositions.length)];
+  enemies.push({ x: x, y: -100, width: 40, height: 80 });
+}
+
+// Controls
+let keys = {};
+document.addEventListener("keydown", e => keys[e.key] = true);
+document.addEventListener("keyup", e => keys[e.key] = false);
+
+// Game loop
+function update() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Move car
+  if (keys["ArrowLeft"] && car.x > 100) car.x -= car.speed;
+  if (keys["ArrowRight"] && car.x < 260) car.x += car.speed;
+
+  // Draw road
+  ctx.fillStyle = "gray";
+  ctx.fillRect(100, 0, 200, canvas.height);
+
+  // Road lines
+  ctx.fillStyle = "white";
+  lines.forEach(line => {
+    line.y += 5;
+    if (line.y > canvas.height) line.y = 0;
+    ctx.fillRect(line.x, line.y, 10, 40);
+  });
+
+  // Draw player car
+  ctx.fillStyle = "red";
+  ctx.fillRect(car.x, car.y, car.width, car.height);
+
+  // Spawn enemies
+  if (Math.random() < 0.02) spawnEnemy();
+
+  // Draw enemies
+  ctx.fillStyle = "blue";
+  enemies.forEach((enemy, index) => {
+    enemy.y += 4;
+    ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
+
+    // Collision
+    if (
+      car.x < enemy.x + enemy.width &&
+      car.x + car.width > enemy.x &&
+      car.y < enemy.y + enemy.height &&
+      car.y + car.height > enemy.y
+    ) {
+      alert("Game Over!");
+      document.location.reload();
+    }
+
+    // Remove off screen
+    if (enemy.y > canvas.height) enemies.splice(index, 1);
+  });
+
+  requestAnimationFrame(update);
+}
+
+update();
